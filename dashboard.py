@@ -16,7 +16,7 @@ def execute_query(query, params=None):
 
 def get_data_dict(query):
     data = execute_query(query)
-    return {row[0]: row[1:] for row in data}
+    return {row[0]: row[1] for row in data}
 
 # Запросы для получения данных
 categories = get_data_dict('SELECT category_id, name FROM categories')

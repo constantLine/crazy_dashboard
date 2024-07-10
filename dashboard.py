@@ -20,6 +20,8 @@ def get_data_dict(query):
 
 # Запросы для получения данных
 categories = get_data_dict('SELECT category_id, name FROM categories')
+st.write("Categories loaded:", categories)
+
 
 def get_product_info():
     query = '''
@@ -121,6 +123,8 @@ index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
 
 # Инициализация данных для графика
 graph_data = {x: [0] * (len(index) + 1) for x in categories.values()}
+st.write("Graph data structure initialized:", graph_data)
+
 
 # Подсчет начального количества товаров в каждой категории
 for category_name in graph_data:

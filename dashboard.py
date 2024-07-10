@@ -26,7 +26,7 @@ def get_product_info():
     SELECT p.product_id, p.name, pc.category_id, c.category_name, pos.shelve_id, pos.count
     FROM products p
     JOIN product_categories pc ON p.product_id = pc.product_id
-    JOIN categories c ON pc.category_id = c.id
+    JOIN categories c ON pc.category_id = c.category_id
     LEFT JOIN products_on_shelves pos ON p.product_id = pos.product_id
     '''
     data = execute_query(query)

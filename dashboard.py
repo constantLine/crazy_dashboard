@@ -23,11 +23,11 @@ categories = get_data_dict('SELECT category_id, name FROM categories')
 
 def get_product_info():
     query = '''
-    SELECT p.id, p.name, pc.category_id, c.category_name, pos.shelve_id, pos.count
+    SELECT p.product_id, p.name, pc.category_id, c.category_name, pos.shelve_id, pos.count
     FROM products p
-    JOIN product_categories pc ON p.id = pc.product_id
+    JOIN product_categories pc ON p.product_id = pc.product_id
     JOIN categories c ON pc.category_id = c.id
-    LEFT JOIN products_on_shelves pos ON p.id = pos.product_id
+    LEFT JOIN products_on_shelves pos ON p.product_id = pos.product_id
     '''
     data = execute_query(query)
     products = {}
@@ -45,10 +45,10 @@ def get_product_info():
 
 def get_checks():
     query = '''
-    SELECT c.id, c.issue_date, cp.product_id, cp.product_count, cs.store_id
+    SELECT c.check_id, c.issue_date, cp.product_id, cp.product_count, cs.store_id
     FROM checks c
-    JOIN checks_stores cs ON c.id = cs.check_id
-    JOIN product_check_positions cp ON c.id = cp.check_id
+    JOIN checks_stores cs ON c.check_id = cs.check_id
+    JOIN product_check_positions cp ON c.check_id = cp.check_id
     '''
     data = execute_query(query)
     checks = {}
@@ -93,17 +93,17 @@ def get_supplies(query):
 products = get_product_info()
 checks = get_checks()
 supplies = get_supplies('''
-    SELECT s.id, s.finish_date, ss.store_id, sw.warehouse_id, sw.shelve_id, sp.product_id, sp.product_count
+    SELECT s.supply_id, s.finish_date, ss.store_id, sw.warehouse_id, sw.shelve_id, sp.product_id, sp.product_count
     FROM supplies s
-    LEFT JOIN supplies_stores ss ON s.id = ss.supply_id
-    LEFT JOIN supplies_warehouses sw ON s.id = sw.supply_id
-    LEFT JOIN supplies_products sp ON s.id = sp.supply_id
+    LEFT JOIN supplies_stores ss ON s.supply_id = ss.supply_id
+    LEFT JOIN supplies_warehouses sw ON s.supply_id = sw.supply_id
+    LEFT JOIN supplies_products sp ON s.supply_id = sp.supply_id
 ''')
 external_supplies = get_supplies('''
-    SELECT es.id, es.finish_date, NULL, esw.warehouse_id, esw.shelve_id, esp.product_id, esp.product_count
+    SELECT es.ext_supply_id, es.finish_date, NULL, esw.warehouse_id, esw.shelve_id, esp.product_id, esp.product_count
     FROM external_supplies es
-    LEFT JOIN external_supplies_warehouses esw ON es.id = esw.supply_id
-    LEFT JOIN external_supplies_products esp ON es.id = esp.supply_id
+    LEFT JOIN external_supplies_warehouses esw ON es.ext_supply_id = esw.supply_id
+    LEFT JOIN external_supplies_products esp ON es.ext_supply_id = esp.supply_id
 ''')
 
 # Создание событий для графика

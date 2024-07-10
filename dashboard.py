@@ -94,7 +94,9 @@ def get_supplies(query):
     return supplies
 
 products = get_product_info()
+st.write("Get product checkpoint passed")
 checks = get_checks()
+st.write("Checks checkpoint passed")
 supplies = get_supplies('''
     SELECT s.supply_id, s.finish_date, ss.store_id, sw.warehouse_id, sw.shelve_id, sp.product_id, sp.product_count
     FROM supplies s
@@ -102,12 +104,15 @@ supplies = get_supplies('''
     LEFT JOIN supplies_warehouses sw ON s.supply_id = sw.supply_id
     LEFT JOIN supplies_products sp ON s.supply_id = sp.supply_id
 ''')
+st.write("Supplies checkpoint passed")
 external_supplies = get_supplies('''
     SELECT es.ext_supply_id, es.finish_date, NULL, esw.warehouse_id, esw.shelve_id, esp.product_id, esp.product_count
     FROM external_supplies es
     LEFT JOIN external_supplies_warehouses esw ON es.ext_supply_id = esw.ext_supply_id
     LEFT JOIN external_supplies_products esp ON es.ext_supply_id = esp.ext_supply_id
 ''')
+st.write("External Supplies checkpoint passed")
+
 
 # Создание событий для графика
 events = {}
@@ -117,6 +122,8 @@ for supply_id, opts in supplies.items():
     events.setdefault(opts['finish_date'], []).append({'type': 'supply', 'data': {'supply_id': supply_id, **opts}})
 for supply_id, opts in external_supplies.items():
     events.setdefault(opts['finish_date'], []).append({'type': 'external_supply', 'data': {'supply_id': supply_id, **opts}})
+
+st.write("Events gen checkpoint passed")
 
 # Создание индекса для графика
 index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]

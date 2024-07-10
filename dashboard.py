@@ -103,8 +103,8 @@ supplies = get_supplies('''
 external_supplies = get_supplies('''
     SELECT es.ext_supply_id, es.finish_date, NULL, esw.warehouse_id, esw.shelve_id, esp.product_id, esp.product_count
     FROM external_supplies es
-    LEFT JOIN external_supplies_warehouses esw ON es.ext_supply_id = esw.supply_id
-    LEFT JOIN external_supplies_products esp ON es.ext_supply_id = esp.supply_id
+    LEFT JOIN external_supplies_warehouses esw ON es.ext_supply_id = esw.ext_supply_id
+    LEFT JOIN external_supplies_products esp ON es.ext_supply_id = esp.ext_supply_id
 ''')
 
 # Создание событий для графика

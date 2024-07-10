@@ -19,7 +19,7 @@ def get_data_dict(query):
     return {row[0]: row[1:] for row in data}
 
 # Запросы для получения данных
-categories = get_data_dict('SELECT id, category_name FROM categories')
+categories = get_data_dict('SELECT category_id, name FROM categories')
 
 def get_product_info():
     query = '''

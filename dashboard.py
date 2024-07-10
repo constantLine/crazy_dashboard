@@ -95,15 +95,15 @@ def get_supplies(query):
 
 products = get_product_info()
 st.write("Get product checkpoint passed")
-#checks = get_checks()
+checks = get_checks()
 st.write("Checks checkpoint passed")
-#supplies = get_supplies('''
-#    SELECT s.supply_id, s.finish_date, ss.store_id, sw.warehouse_id, sw.shelve_id, sp.product_id, sp.product_count
-#    FROM supplies s
-#    LEFT JOIN supplies_stores ss ON s.supply_id = ss.supply_id
-#    LEFT JOIN supplies_warehouses sw ON s.supply_id = sw.supply_id
-#    LEFT JOIN supplies_products sp ON s.supply_id = sp.supply_id
-#''')
+supplies = get_supplies('''
+    SELECT s.supply_id, s.finish_date, ss.store_id, sw.warehouse_id, sw.shelve_id, sp.product_id, sp.product_count
+    FROM supplies s
+    LEFT JOIN supplies_stores ss ON s.supply_id = ss.supply_id
+    LEFT JOIN supplies_warehouses sw ON s.supply_id = sw.supply_id
+    LEFT JOIN supplies_products sp ON s.supply_id = sp.supply_id
+''')
 st.write("Supplies checkpoint passed")
 external_supplies = get_supplies('''
     SELECT es.ext_supply_id, es.finish_date, NULL, esw.warehouse_id, esw.shelve_id, esp.product_id, esp.product_count

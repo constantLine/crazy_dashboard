@@ -125,7 +125,7 @@ st.write("Index things:", index)
 
 # Инициализация данных для графика
 graph_data = {x: [0] * (len(index) + 1) for x in categories.values()}
-st.write("categories.values():", categories.values())
+st.write("categories.values():", *categories.values())
 st.write("Graph data structure initialized:", graph_data)
 
 

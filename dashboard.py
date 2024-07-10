@@ -95,7 +95,7 @@ def get_supplies(query):
 
 products = get_product_info()
 st.write("Get product checkpoint passed")
-checks = get_checks()
+#checks = get_checks()
 st.write("Checks checkpoint passed")
 supplies = get_supplies('''
     SELECT s.supply_id, s.finish_date, ss.store_id, sw.warehouse_id, sw.shelve_id, sp.product_id, sp.product_count

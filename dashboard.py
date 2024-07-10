@@ -120,6 +120,8 @@ for supply_id, opts in external_supplies.items():
 
 # Создание индекса для графика
 index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
+st.write("Index things:", index)
+
 
 # Инициализация данных для графика
 graph_data = {x: [0] * (len(index) + 1) for x in categories.values()}

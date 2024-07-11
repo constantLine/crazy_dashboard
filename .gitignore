@@ -1,3 +1,5 @@
 venv
 requirements.txt
 dashboard_original.py
+dashboard2.py
+dashboard-proxy.py

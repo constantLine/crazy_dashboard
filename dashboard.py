@@ -23,24 +23,25 @@ products = execute_query('''
     JOIN product_categories pc ON p.product_id = pc.product_id
     JOIN categories c ON pc.category_id = c.category_id
     LEFT JOIN products_on_shelves pos ON p.product_id = pos.product_id
+    GROUP BY p.product_id, p.name, pc.category_id, c.name, pos.shelve_id;
 ''')
 
 checks = execute_query('''
     SELECT c.check_id, c.issue_date, cp.product_id, cp.product_count
     FROM checks c
-    JOIN product_check_positions cp ON c.check_id = cp.check_id
+    JOIN product_check_positions cp ON c.check_id = cp.check_id;
 ''')
 
 supplies = execute_query('''
     SELECT s.supply_id, s.finish_date, sp.product_id, sp.product_count
     FROM supplies s
-    JOIN supplies_products sp ON s.supply_id = sp.supply_id
+    JOIN supplies_products sp ON s.supply_id = sp.supply_id;
 ''')
 
 external_supplies = execute_query('''
     SELECT es.external_supply_id, es.finish_date, esp.product_id, esp.product_count
     FROM external_supplies es
-    JOIN external_supplies_products esp ON es.external_supply_id = esp.external_supply_id
+    JOIN external_supplies_products esp ON es.external_supply_id = esp.external_supply_id;
 ''')
 
 events = {}

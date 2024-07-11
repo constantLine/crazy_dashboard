@@ -107,7 +107,7 @@ for event_date in reversed(sorted(events.keys())):
     st.write("\nevent_dates = ", event_date)
     if offset != 0:
         for category in graph_data:
-            graph_data[category][-1-offset] = graph_data[category][-1-(offset-1)] + diffs.get(category, 0)
+            graph_data[category][-1+offset] = graph_data[category][-1-(offset-1)] + diffs.get(category, 0)
     diffs.clear()
     day_events = events[event_date]
     for event in day_events:

@@ -110,6 +110,8 @@ for event_date in reversed(sorted(events.keys())):
             graph_data[category][-1-offset] = graph_data[category][-1-(offset-1)] + diffs.get(category, 0)
     diffs.clear()
     day_events = events[event_date]
+    st.write("day_events = ", day_events)
+
     for event in day_events:
         category = categories[[pc[2] for pc in products if pc[0] == event['product_id']][0]]
         st.write("\ncategories = ", category)

@@ -19,7 +19,7 @@ def get_data_dict(query):
 categories = get_data_dict('SELECT category_id, name FROM categories')
 st.write("Categories loaded:", categories)
 products = execute_query('''
-    SELECT p.product_id, p.name, pc.category_id, c.name, COALESCE(pos.count, 0)
+    SELECT p.product_id, p.name, pc.category_id, c.name, pos.count
     FROM products p
     JOIN product_categories pc ON p.product_id = pc.product_id
     JOIN categories c ON pc.category_id = c.category_id
@@ -87,7 +87,6 @@ index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
 st.write("Indexies 1 =", index)
 
 graph_data = {category_name: [0] * (len(index) + 1) for category_name in categories.values()}
-st.write("Graphdata 0.5 =", graph_data)
 
 for product_id, name, category_id, category_name, count in products:
     graph_data[category_name][-1] += count

@@ -102,10 +102,10 @@ st.write("Events proxy =", events.items())
 
 diffs = {}
 offset = 0
-event_dates = reversed(sorted(events.keys()))
-(st.write("Event Date", x) for x in event_dates)
+x = []
 
-for event_date in event_dates:
+for event_date in reversed(sorted(events.keys())):
+    x.append(event_date)
     st.write("\nevent_date = ", event_date)
     if offset != 0:
         for category in graph_data:
@@ -127,6 +127,7 @@ for event_date in event_dates:
     offset += 1
     st.write("\ndiffs = ", diffs)
 
+st.write("X's=", x)
 st.write("Indexies 2 =", index)
 st.write("Graphdata 2 =", graph_data)
 

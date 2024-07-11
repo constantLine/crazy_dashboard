@@ -27,7 +27,7 @@ products = execute_query('''
     GROUP BY p.product_id, p.name, pc.category_id, c.name, pos.shelve_id, pos.product_count;
 ''')
 st.write("Get product checkpoint passed len=", len(products))
-st.write(products)
+st.write(products[:15])
 
 
 checks = execute_query('''
@@ -36,7 +36,7 @@ checks = execute_query('''
     JOIN product_check_positions cp ON c.check_id = cp.check_id;
 ''')
 st.write("Checks checkpoint passed len=", len(checks))
-st.write(checks[:10])
+st.write(checks[:15])
 
 supplies = execute_query('''
     SELECT s.supply_id, s.finish_date, sp.product_id, sp.product_count
@@ -44,7 +44,7 @@ supplies = execute_query('''
     JOIN supplies_products sp ON s.supply_id = sp.supply_id;
 ''')
 st.write("Supplies checkpoint passed len=", len(supplies))
-st.write(supplies[:10])
+st.write(supplies[:15])
 
 external_supplies = execute_query('''
     SELECT es.ext_supply_id, es.finish_date, esp.product_id, esp.product_count
@@ -52,7 +52,7 @@ external_supplies = execute_query('''
     JOIN external_supplies_products esp ON es.ext_supply_id = esp.ext_supply_id;
 ''')
 st.write("External_supplies checkpoint passed len=", len(external_supplies))
-st.write(external_supplies[:10])
+st.write(external_supplies[:15])
 
 events = {}
 
@@ -63,7 +63,7 @@ for check in checks:
     events[issue_date].append({'type': 'check', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events check checkpoint passed len=", len(events.items()))
-st.write(events.items())
+st.write(events.items()[:15])
 
 for supply in supplies:
     supply_id, finish_date, product_id, product_count = supply
@@ -72,7 +72,7 @@ for supply in supplies:
     events[finish_date].append({'type': 'supply', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events supply checkpoint passed len=", len(events.items()))
-st.write(events.items())
+st.write(events.items()[:15])
 
 for external_supply in external_supplies:
     external_supply_id, finish_date, product_id, product_count = external_supply
@@ -81,7 +81,7 @@ for external_supply in external_supplies:
     events[finish_date].append({'type': 'external_supply', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events external checkpoint passed len=", len(events.items()))
-st.write(events.items())
+st.write(events.items()[:15])
 
 index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
 st.write("Indexies 1 =", index)
@@ -98,7 +98,7 @@ first = list(sorted(events.keys()))[0]
 events[first - datetime.timedelta(days=1)] = []
 index = [(first - datetime.timedelta(days=1)).strftime('%Y-%m-%d')] + index
 
-st.write("Events proxy =", events.items())
+st.write("Events proxy =", events.items()[:15])
 
 diffs = {}
 offset = 0

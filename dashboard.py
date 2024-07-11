@@ -17,6 +17,7 @@ def get_data_dict(query):
     return {row[0]: row[1] for row in data}
 
 categories = get_data_dict('SELECT category_id, name FROM categories')
+st.write("Categories loaded:", categories)
 products = execute_query('''
     SELECT p.product_id, p.name, pc.category_id, c.name, COALESCE(pos.count, 0)
     FROM products p
@@ -25,24 +26,33 @@ products = execute_query('''
     LEFT JOIN products_on_shelves pos ON p.product_id = pos.product_id
     GROUP BY p.product_id, p.name, pc.category_id, c.name, pos.shelve_id;
 ''')
+st.write("Get product checkpoint passed len=", len(products))
+st.write(products[:10])
+
 
 checks = execute_query('''
     SELECT c.check_id, c.issue_date, cp.product_id, cp.product_count
     FROM checks c
     JOIN product_check_positions cp ON c.check_id = cp.check_id;
 ''')
+st.write("Checks checkpoint passed len=", len(checks))
+st.write(checks[:10])
 
 supplies = execute_query('''
     SELECT s.supply_id, s.finish_date, sp.product_id, sp.product_count
     FROM supplies s
     JOIN supplies_products sp ON s.supply_id = sp.supply_id;
 ''')
+st.write("Supplies checkpoint passed len=", len(supplies))
+st.write(supplies[:10])
 
 external_supplies = execute_query('''
     SELECT es.ext_supply_id, es.finish_date, esp.product_id, esp.product_count
     FROM external_supplies es
     JOIN external_supplies_products esp ON es.ext_supply_id = esp.ext_supply_id;
 ''')
+st.write("External_supplies checkpoint passed len=", len(external_supplies))
+st.write(external_supplies[:10])
 
 events = {}
 

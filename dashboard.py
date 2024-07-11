@@ -113,17 +113,32 @@ for event_date in reversed(sorted(events.keys())):
     st.write("day_events = ", day_events)
 
     for event in day_events:
-        category = categories[[pc[2] for pc in products if pc[0] == event['product_id']][0]]
-        st.write("\ncategories = ", category)
-
-        if category not in diffs:
-            diffs[category] = 0
         if event['type'] == 'check':
-            diffs[category] += event['product_count']
+            for position in event['data']['positions']:
+                category = categories[[pc[2] for pc in products if pc[0] == position['product_id']][0]]
+                st.write("\ncategories = ", category)
+
+                if category not in diffs:
+                    diffs[category] = 0
+                diffs[category] += position['product_count']
         elif event['type'] == 'external_supply':
-            diffs[category] -= event['product_count']
+            for position in event['data']['positions']:
+                category = categories[[pc[2] for pc in products if pc[0] == position['product_id']][0]]
+                st.write("\ncategories = ", category)
+
+                if category not in diffs:
+                    diffs[category] = 0
+                diffs[category] -= position['product_count']
+        elif event['type'] == 'supply':
+            for position in event['data']['positions']:
+                category = categories[[pc[2] for pc in products if pc[0] == position['product_id']][0]]
+                st.write("\ncategories = ", category)
+
+                if category not in diffs:
+                    diffs[category] = 0
     offset += 1
     st.write("\ndiffs = ", diffs)
+
 
 st.write("Indexies 2 =", index)
 st.write("Graphdata 2 =", graph_data)

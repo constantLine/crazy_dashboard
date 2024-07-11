@@ -63,7 +63,7 @@ for check in checks:
     events[issue_date].append({'type': 'check', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events check checkpoint passed len=", len(events.items()))
-st.write(events.items())
+st.write(events)
 
 for supply in supplies:
     supply_id, finish_date, product_id, product_count = supply
@@ -72,7 +72,7 @@ for supply in supplies:
     events[finish_date].append({'type': 'supply', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events supply checkpoint passed len=", len(events.items()))
-st.write(events.items())
+st.write(events)
 
 for external_supply in external_supplies:
     external_supply_id, finish_date, product_id, product_count = external_supply
@@ -81,7 +81,7 @@ for external_supply in external_supplies:
     events[finish_date].append({'type': 'external_supply', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events external checkpoint passed len=", len(events.items()))
-st.write(events.items())
+st.write(events)
 
 index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
 

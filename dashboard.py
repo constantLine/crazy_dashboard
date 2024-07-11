@@ -159,13 +159,13 @@ st.write("Get product checkpoint passed len=", len(products))
 st.write(products)
 
 st.write("Checks checkpoint passed len=", len(checks))
-st.write(checks[:10])
+st.write(checks)
 
 st.write("Supplies checkpoint passed len=", len(supplies))
-st.write(supplies[:10])
+st.write(supplies)
 
 st.write("External_supplies checkpoint passed len=", len(external_supplies))
-st.write(external_supplies[:10])
+st.write(external_supplies)
 
 
 for check, opts in checks.items():

@@ -63,7 +63,7 @@ for check in checks:
     events[issue_date].append({'type': 'check', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events check checkpoint passed len=", len(events.items()))
-st.write(events)
+st.write(events.items())
 
 for supply in supplies:
     supply_id, finish_date, product_id, product_count = supply
@@ -72,7 +72,7 @@ for supply in supplies:
     events[finish_date].append({'type': 'supply', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events supply checkpoint passed len=", len(events.items()))
-st.write(events)
+st.write(events.items())
 
 for external_supply in external_supplies:
     external_supply_id, finish_date, product_id, product_count = external_supply
@@ -81,14 +81,17 @@ for external_supply in external_supplies:
     events[finish_date].append({'type': 'external_supply', 'product_id': product_id, 'product_count': product_count})
 
 st.write("Events external checkpoint passed len=", len(events.items()))
-st.write(events)
+st.write(events.items())
 
 index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
+st.write("Indexies 1 =", index)
 
 graph_data = {category_name: [0] * (len(index) + 1) for category_name in categories.values()}
 
 for product_id, name, category_id, category_name, count in products:
     graph_data[category_name][-1] += count
+
+st.write("Graphdata 1 =", graph_data)
 
 first = list(sorted(events.keys()))[0]
 
@@ -113,6 +116,9 @@ for event_date in reversed(sorted(events.keys())):
         elif event['type'] == 'external_supply':
             diffs[category] -= event['product_count']
     offset += 1
+
+st.write("Indexies 2 =", index)
+st.write("Graphdata 2 =", graph_data)
 
 data = pd.DataFrame(data=graph_data, index=index)
 st.area_chart(data)

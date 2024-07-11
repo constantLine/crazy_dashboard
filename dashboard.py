@@ -98,6 +98,9 @@ first = list(sorted(events.keys()))[0]
 events[first - datetime.timedelta(days=1)] = []
 index = [(first - datetime.timedelta(days=1)).strftime('%Y-%m-%d')] + index
 
+st.write("Indexies 1.5 =", index)
+st.write("Events proxy =", events)
+
 diffs = {}
 offset = 0
 

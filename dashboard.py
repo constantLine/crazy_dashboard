@@ -112,6 +112,8 @@ for event_date in reversed(sorted(events.keys())):
     day_events = events[event_date]
     for event in day_events:
         category = categories[[pc[2] for pc in products if pc[0] == event['product_id']][0]]
+        st.write("\ncategories = ", category)
+
         if category not in diffs:
             diffs[category] = 0
         if event['type'] == 'check':
@@ -119,6 +121,7 @@ for event_date in reversed(sorted(events.keys())):
         elif event['type'] == 'external_supply':
             diffs[category] -= event['product_count']
     offset += 1
+    st.write("\ndiffs = ", diffs)
 
 st.write("Indexies 2 =", index)
 st.write("Graphdata 2 =", graph_data)

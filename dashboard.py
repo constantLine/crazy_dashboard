@@ -19,7 +19,7 @@ def get_data_dict(query):
 categories = get_data_dict('SELECT category_id, name FROM categories')
 st.write("Categories loaded:", categories)
 products = execute_query('''
-    SELECT p.product_id, p.name, pc.category_id, c.name, pos.count
+    SELECT p.product_id, p.name, pc.category_id, c.name, pos.product_count
     FROM products p
     JOIN product_categories pc ON p.product_id = pc.product_id
     JOIN categories c ON pc.category_id = c.category_id

@@ -103,7 +103,7 @@ st.write("Events proxy =", events.items())
 diffs = {}
 offset = 0
 event_dates = reversed(sorted(events.keys()))
-st.write("Event Dates =", event_dates)
+(st.write("Event Date", x) for x in event_dates)
 
 for event_date in event_dates:
     st.write("\nevent_date = ", event_date)

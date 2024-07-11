@@ -87,6 +87,7 @@ index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
 st.write("Indexies 1 =", index)
 
 graph_data = {category_name: [0] * (len(index) + 1) for category_name in categories.values()}
+st.write("Graphdata 0.5 =", graph_data)
 
 for product_id, name, category_id, category_name, count in products:
     graph_data[category_name][-1] += count

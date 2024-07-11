@@ -27,7 +27,7 @@ products = execute_query('''
     GROUP BY p.product_id, p.name, pc.category_id, c.name, pos.shelve_id;
 ''')
 st.write("Get product checkpoint passed len=", len(products))
-st.write(products[:10])
+st.write(products)
 
 
 checks = execute_query('''

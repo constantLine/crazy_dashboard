@@ -39,9 +39,9 @@ supplies = execute_query('''
 ''')
 
 external_supplies = execute_query('''
-    SELECT es.external_supply_id, es.finish_date, esp.product_id, esp.product_count
+    SELECT es.ext_supply_id, es.finish_date, esp.product_id, esp.product_count
     FROM external_supplies es
-    JOIN external_supplies_products esp ON es.external_supply_id = esp.external_supply_id;
+    JOIN external_supplies_products esp ON es.ext_supply_id = esp.ext_supply_id;
 ''')
 
 events = {}

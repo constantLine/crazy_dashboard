@@ -103,7 +103,7 @@ st.write("Events proxy =", events.items())
 diffs = {}
 offset = 0
 
-for event_date in reversed(sorted(events.keys())):
+for event_date in sorted(events.keys()):
     st.write("\nevent_dates = ", event_date)
     if offset != 0:
         for category in graph_data:

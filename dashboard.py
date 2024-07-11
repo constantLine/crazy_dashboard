@@ -160,18 +160,27 @@ for check, opts in checks.items():
         events[opts['issue_date']] = []
     events[opts['issue_date']].append({'type': 'check', 'data': {'check_id': check, **opts}})
 
+st.write("Events check checkpoint passed len=", len(events.items()))
+st.write(events.items())
+
 for supply, opts in supplies.items():
     if opts['finish_date'] not in events:
         events[opts['finish_date']] = []
     events[opts['finish_date']].append({'type': 'supply', 'data': {'supply_id': supply, **opts}})
+
+st.write("Events supply checkpoint passed len=", len(events.items()))
+st.write(events.items())
 
 for supply, opts in external_supplies.items():
     if opts['finish_date'] not in events:
         events[opts['finish_date']] = []
     events[opts['finish_date']].append({'type': 'external_supply', 'data': {'supply_id': supply, **opts}})
 
-index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
+st.write("Events external checkpoint passed len=", len(events.items()))
+st.write(events.items())
 
+index = [x.strftime('%Y-%m-%d') for x in sorted(events.keys())]
+st.write("Indexies 1 =", index)
 graph_data = {x: [0] * (len(index) + 1) for x in categories.values()}
 
 for category_name in graph_data:
@@ -190,7 +199,7 @@ first = list(sorted(events.keys()))[0]
 events[first - datetime.timedelta(days=1)] = []
 index = [(first - datetime.timedelta(days=1)).strftime('%Y-%m-%d')] + index
 
-st.write("Events proxy =", events.items())
+st.write("Events proxy =", *events.items())
 
 diffs = {}
 offset = 0

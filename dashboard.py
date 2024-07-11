@@ -98,13 +98,13 @@ first = list(sorted(events.keys()))[0]
 events[first - datetime.timedelta(days=1)] = []
 index = [(first - datetime.timedelta(days=1)).strftime('%Y-%m-%d')] + index
 
-st.write("Indexies 1.5 =", index)
 st.write("Events proxy =", events.items())
 
 diffs = {}
 offset = 0
 
 for event_date in reversed(sorted(events.keys())):
+    st.write("\nevent_dates = ", event_date)
     if offset != 0:
         for category in graph_data:
             graph_data[category][-1-offset] = graph_data[category][-1-(offset-1)] + diffs.get(category, 0)
